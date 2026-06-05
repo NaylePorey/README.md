@@ -1,0 +1,45 @@
+markdown# ДОКЛАД ПО ПРОЕКТ: Изследване на основите на HTTP
+**Изготвил:** Найле (Nayle)
+
+## 1. Проучване на инструментите за разработчици (DevTools)
+При инспектиране на мрежовата активност (Network Tab) в браузъра беше анализирана успешна заявка към сървърите на Google:
+* **Request URL:** `https://google.com...`
+* **Request Method:** `POST`
+* **Status Code:** `200 OK`
+* **Извод:** Браузърът използва метода `POST`, за да изпрати данни (системни логове) към сървъра, а статус кодът `200 OK` потвърждава, че сървърът ги е приел успешно.
+
+## 2. Взаимодействие с HTML форми
+Беше създадена работеща HTML форма, свързана с тестов сървър:
+
+```html
+<form action="https://webhook.site" method="POST">  
+    <label for="name">Име:</label>  
+    <input type="text" id="name" name="name"><br>  
+    <label for="email">Имейл:</label>  
+    <input type="email" id="email" name="email"><br>  
+    <button type="submit">Изпрати</button>  
+</form>  
+```
+
+* **Резултат от теста:** Формата беше попълнена на живо с име **Nayle** и имейл **naileporey@abv.bg**. Данните бяха успешно изпратени и уловени от платформата `webhook.site` под формата на `POST` заявка в секцията **Form values**.
+
+## 3. API взаимодействие с JavaScript и Postman (JSONPlaceholder)
+Заявките бяха тествани и анализирани спрямо спецификацията на публичното API `JSONPlaceholder`. Ето структурата на кодовете и върнатите отговори от сървъра:
+
+* **GET Заявка (Извличане на данни):**
+  * *Адрес:* `https://typicode.com`
+  * *Върнат отговор от сървъра (JSON):*
+  ```json
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    "body": "quia et suscipit\nsuscipit recusandae..."
+  }
+  ```
+
+* **POST Заявка (Създаване на нов ресурс):**
+  * *Върнат отговор от сървъра:* Сървърът потвърждава записа и връща обекта с ново симулирано ID: `{ "title": "Нов пост", "body": "Съдържание", "userId": 1, "id": 101 }`.
+
+* **DELETE Заявка (Изтриване на ресурс):**
+  * *Върнат отговор:* Сървърът връща празен обект или **Status: 200 OK**, което дока
